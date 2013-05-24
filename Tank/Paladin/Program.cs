@@ -7,11 +7,11 @@ namespace Paladin
 {
     public class Program
     {
-        private static readonly Random Random = new Random();
+        public static readonly Random Random = new Random();
 
         private static readonly Boss Boss = new Boss
                                                 {
-                                                    DamagePerHit = 300000, 
+                                                    DamagePerHit = 350000, 
                                                     SwingTimer = 2
                                                 };
 
@@ -24,14 +24,16 @@ namespace Paladin
                                                     Block = 21.72f,
                                                     AttackPower = 26935,
                                                     Armor = 55321,
-                                                    Haste = 0.966f,
+                                                    Haste = 0.0966f,
                                                     ChanceToHit = 1f,
                                                 };
 
         public static void Main(string[] args)
         {
-            const int numberOfSimulations = 10000;
-            const int numberOfBossSwings = 5;
+            //Console.WriteLine(Tank.SealHealPerSec());
+
+            const int numberOfSimulations = 100000;
+            const int numberOfBossSwings = 7;
 
             int deaths = 0;
             for (int i = 0; i < numberOfSimulations; i++)
@@ -59,7 +61,8 @@ namespace Paladin
                 if (avoidanceRoll >= Tank.Avoidance)
                 {
                     float damage = Boss.DamagePerHit;
-                    damage = damage * Tank.ArmorDamageReduction;
+                    damage = damage * Tank.ArmorDamageReduction();
+                    damage = damage * Tank.ShieldOfTheRightousFactor();
                     int blockRoll = Random.Next(100);
                     if (blockRoll >= Tank.Block)
                     {
@@ -103,27 +106,40 @@ namespace Paladin
 
         public int Armor { get; set; }
 
-        public float ArmorDamageReduction
-        {
-            get { return this.Armor / (this.Armor + 46257.5f); }
-        }
-
         public int AttackPower { get; set; }
 
         public float Haste { get; set; }
 
         public float ChanceToHit { get; set; }
 
+        public float ArmorDamageReduction()
+        {
+            return this.Armor / (this.Armor + 46257.5f);
+        }
+
         //(0.15 * Attack power.15 * holy spell power)
         public float SealHealPerSec()
         {
-            float hasteFactor = 1 - this.Haste / (1 + this.Haste);
-            float gcd = 1.5f * hasteFactor;
-            float attacksPerSecond = 1 / 2.6f / hasteFactor;
-            float spellsPerSecond = 1 / (3 + 5.4f) / gcd;
+            float attacksPerSecond = 1 / 2.6f / GetHasteFactor();
+            float spellsPerSecond = 1 / (3 + 5.4f) / GetGcd();
             const float sealProcRate = 0.867f;
             float numberOfSealHealsPerSec = (attacksPerSecond + spellsPerSecond) * sealProcRate * this.ChanceToHit;
             return numberOfSealHealsPerSec * 0.15f * (this.AttackPower + this.SpellPower);
+        }
+
+        private float GetGcd()
+        {
+            return 1.5f * GetHasteFactor();
+        }
+
+        private float GetHasteFactor()
+        {
+            return 1 - this.Haste / (1 + this.Haste);
+        }
+
+        public float ShieldOfTheRightousFactor()
+        {
+            return 1 - 3f / (5.4f * this.GetGcd());
         }
 
         public void Heal(float hitPoints)

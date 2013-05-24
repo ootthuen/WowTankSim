@@ -15,66 +15,80 @@ namespace Paladin
                                                     SwingTimer = 2
                                                 };
 
-        private static readonly Tank Tank = new Tank
-                                                {
-                                                    CurrentHP = 600000,
-                                                    MaxHP = 600000,
-                                                    Parry = 13.47f,
-                                                    Dodge = 2.64f,
-                                                    Block = 21.72f,
-                                                    AttackPower = 26935,
-                                                    Armor = 55321,
-                                                    Haste = 0.0966f,
-                                                    ChanceToHit = 1f,
-                                                };
+        private static readonly Tank TankHaste = new Tank
+                                                     {
+                                                         CurrentHP = 670068,
+                                                         MaxHP = 670068,
+                                                         Parry = 13.47f,
+                                                         Dodge = 2.64f,
+                                                         Block = 21.72f,
+                                                         AttackPower = 26935,
+                                                         Armor = 55321,
+                                                         Haste = 9.66f,
+                                                         ChanceToHit = 1f,
+                                                     };
+
+        private static readonly Tank TankAvoidance = new Tank
+                                                         {
+                                                             CurrentHP = 683388,
+                                                             MaxHP = 683388,
+                                                             Parry = 18.71f,
+                                                             Dodge = 6.53f,
+                                                             Block = 24.11f,
+                                                             AttackPower = 26935,
+                                                             Armor = 57017,
+                                                             Haste = 0.77f,
+                                                             ChanceToHit = 90.1f,
+                                                         };
 
         public static void Main(string[] args)
         {
-            //Console.WriteLine(Tank.SealHealPerSec());
+            Simulate(TankHaste, "TankHaste", numberOfBossSwings: 7, numberOfSimulations: 100000);
+            Simulate(TankAvoidance, "TankAvoidance", numberOfBossSwings: 7, numberOfSimulations: 100000);
+            Console.ReadKey();
+        }
 
-            const int numberOfSimulations = 100000;
-            const int numberOfBossSwings = 7;
-
+        private static void Simulate(Tank tank, string tankType, int numberOfBossSwings, int numberOfSimulations)
+        {
             int deaths = 0;
             for (int i = 0; i < numberOfSimulations; i++)
             {
-                bool doesTankDieAfter = DoesTankDieAfter(numberOfBossSwings);
+                bool doesTankDieAfter = DoesTankDieAfter(numberOfBossSwings, tank);
                 if (doesTankDieAfter)
                 {
                     deaths++;
                 }
             }
             float deathRate = (float)deaths / numberOfSimulations * 100;
-            Console.WriteLine(string.Format("If boss chains {1} hits, tank dies {0}% of the time", deathRate, numberOfBossSwings));
-            Console.ReadKey();
+            Console.WriteLine(string.Format("{2}:\tIf boss chains {1} hits, tank dies {0}% of the time", deathRate, numberOfBossSwings, tankType));
         }
 
-        private static bool DoesTankDieAfter(int numberOfBossSwings)
+        private static bool DoesTankDieAfter(int numberOfBossSwings, Tank tank)
         {
             float timeSinceSacredShieldProc = 6;
-            Tank.CurrentHP = Tank.MaxHP;
+            tank.CurrentHP = tank.MaxHP;
             for (int i = 0; i < numberOfBossSwings; i++)
             {
-                Tank.Heal(Tank.SealHealPerSec() * Boss.SwingTimer);
+                tank.Heal(tank.SealHealPerSec() * Boss.SwingTimer);
                 timeSinceSacredShieldProc += Boss.SwingTimer;
                 int avoidanceRoll = Random.Next(100);
-                if (avoidanceRoll >= Tank.Avoidance)
+                if (avoidanceRoll >= tank.Avoidance)
                 {
                     float damage = Boss.DamagePerHit;
-                    damage = damage * Tank.ArmorDamageReduction();
-                    damage = damage * Tank.ShieldOfTheRightousFactor();
+                    damage = damage * tank.ArmorDamageReduction();
+                    damage = damage * tank.ShieldOfTheRightousFactor();
                     int blockRoll = Random.Next(100);
-                    if (blockRoll >= Tank.Block)
+                    if (blockRoll >= tank.Block)
                     {
                         damage = damage * 0.7f;
                     }
                     if (timeSinceSacredShieldProc >= 6)
                     {
                         timeSinceSacredShieldProc = 0;
-                        damage = damage - (343 + 1.17f * Tank.SpellPower);
+                        damage = damage - (343 + 1.17f * tank.SpellPower);
                     }
-                    Tank.CurrentHP -= (int)damage;
-                    if (Tank.CurrentHP <= 0)
+                    tank.CurrentHP -= (int)damage;
+                    if (tank.CurrentHP <= 0)
                     {
                         return true;
                     }
@@ -134,12 +148,13 @@ namespace Paladin
 
         private float GetHasteFactor()
         {
-            return 1 - this.Haste / (1 + this.Haste);
+            return 1 - this.Haste / (100 + this.Haste);
         }
 
         public float ShieldOfTheRightousFactor()
         {
-            return 1 - 3f / (5.4f * this.GetGcd());
+            float f = 3f / (5.4f * this.GetGcd()) * (0.25f + this.Block * 0.01f);
+            return 1 - f;
         }
 
         public void Heal(float hitPoints)

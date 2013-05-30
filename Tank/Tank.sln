@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladin", "Paladin\Paladin.csproj", "{A87FE8BB-0158-4A64-A784-7451F9EB7A56}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankSimulator", "TankSimulator\TankSimulator.csproj", "{044DA17C-7B10-4F16-8F43-0BCBB2FCC0ED}"
 EndProject
 Global
@@ -11,10 +9,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A87FE8BB-0158-4A64-A784-7451F9EB7A56}.Debug|x86.ActiveCfg = Debug|x86
-		{A87FE8BB-0158-4A64-A784-7451F9EB7A56}.Debug|x86.Build.0 = Debug|x86
-		{A87FE8BB-0158-4A64-A784-7451F9EB7A56}.Release|x86.ActiveCfg = Release|x86
-		{A87FE8BB-0158-4A64-A784-7451F9EB7A56}.Release|x86.Build.0 = Release|x86
 		{044DA17C-7B10-4F16-8F43-0BCBB2FCC0ED}.Debug|x86.ActiveCfg = Debug|x86
 		{044DA17C-7B10-4F16-8F43-0BCBB2FCC0ED}.Debug|x86.Build.0 = Debug|x86
 		{044DA17C-7B10-4F16-8F43-0BCBB2FCC0ED}.Release|x86.ActiveCfg = Release|x86

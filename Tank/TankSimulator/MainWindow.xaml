@@ -17,36 +17,58 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Stat:" Margin="0,0,4,0" Width="100"/>
+                <Label Content="Value/Rating:" Margin="0,0,4,0" Width="100"/>
+                <Label Content="%:" Margin="0,0,4,0" Width="50"/>
+                <Label Content="Modify:" Margin="0,0,4,0" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Label Content="Strength:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=Strength, Mode=TwoWay}"/>
+                <TextBox Width="100" Text="{Binding Path=Strength, Mode=TwoWay}"/>
+                <Label Width="50"/>
+                <TextBox Width="100" Text="{Binding Path=AddStrength, Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                 <Label Content="Stamina:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=Stamina}"/>
+                <TextBox Width="100" Text="{Binding Path=Stamina}"/>
+                <Label Width="50"/>
+                <TextBox Width="100" Text="{Binding Path=AddStamina}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="HasteRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=HasteRating}"/>
+                <Label Content="Haste:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=HasteRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Haste}"/>
+                <TextBox Width="100" Text="{Binding Path=AddHasteRating}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="HitRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=HitRating}"/>
+                <Label Content="Hit:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=HitRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Hit}"/>
+                <TextBox Width="100" Text="{Binding Path=AddRating}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="ExpertiseRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=ExpertiseRating}"/>
+                <Label Content="Expertise:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=ExpertiseRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Expertise}"/>
+                <TextBox Width="100" Text="{Binding Path=AddExpertiseRating}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="DodgeRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=DodgeRating}"/>
+                <Label Content="Dodge:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=DodgeRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Dodge}"/>
+                <TextBox Width="100" Text="{Binding Path=AddDodgeRating}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="ParryRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=ParryRating}"/>
+                <Label Content="Parry:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=ParryRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Parry}"/>
+                <TextBox Width="100" Text="{Binding Path=AddParryRating}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Content="MasteryRating:" Margin="0,0,4,0" Width="100"/>
-                <TextBox Width="50" Text="{Binding Path=MasteryRating}"/>
+                <Label Content="Mastery:" Margin="0,0,4,0" Width="100"/>
+                <TextBox Width="100" Text="{Binding Path=MasteryRating}"/>
+                <TextBox Width="50" Text="{Binding Path=Mastery}"/>
+                <TextBox Width="100" Text="{Binding Path=AddMasteryRating}"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

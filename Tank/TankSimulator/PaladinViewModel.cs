@@ -35,6 +35,22 @@ namespace TankSimulator
             }
         }
 
+        public int AddStrength
+        {
+            get
+            {
+                return Paladin.AddStrength;
+            }
+            set
+            {
+                if (Paladin.AddStrength != value)
+                {
+                    Paladin.AddStrength = value;
+                    OnPropertyChanged("AddStrength");
+                }
+            }
+        }
+
         public int Stamina
         {
             get
@@ -51,6 +67,22 @@ namespace TankSimulator
             }
         }
 
+        public int AddStamina
+        {
+            get
+            {
+                return Paladin.AddStamina;
+            }
+            set
+            {
+                if (Paladin.AddStamina != value)
+                {
+                    Paladin.AddStamina = value;
+                    OnPropertyChanged("AddStamina");
+                }
+            }
+        }
+
         public int MasteryRating
         {
             get
@@ -63,6 +95,22 @@ namespace TankSimulator
                 {
                     Paladin.MasteryRating = value;
                     OnPropertyChanged("MasteryRating");
+                }
+            }
+        }
+
+        public int AddMasteryRating
+        {
+            get
+            {
+                return Paladin.AddMasteryRating;
+            }
+            set
+            {
+                if (Paladin.AddMasteryRating != value)
+                {
+                    Paladin.AddMasteryRating = value;
+                    OnPropertyChanged("AddMasteryRating");
                 }
             }
         }

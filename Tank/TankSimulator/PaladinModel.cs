@@ -27,5 +27,37 @@ namespace TankSimulator
         public string Name { get; set; }
 
         public string Realm { get; set; }
+
+        public int AddStrength1 { get; set; }
+
+        public int AddStrength2 { get; set; }
+
+        public int AddStamina1 { get; set; }
+
+        public int AddStamina2 { get; set; }
+
+        public int AddMasteryRating1 { get; set; }
+
+        public int AddMasteryRating2 { get; set; }
+
+        public int AddDodgeRating1 { get; set; }
+
+        public int AddDodgeRating2 { get; set; }
+
+        public int AddParryRating1 { get; set; }
+
+        public int AddParryRating2 { get; set; }
+
+        public int AddHasteRating1 { get; set; }
+
+        public int AddHasteRating2 { get; set; }
+
+        public int AddExpertiseRating1 { get; set; }
+
+        public int AddExpertiseRating2 { get; set; }
+
+        public int AddHitRating1 { get; set; }
+
+        public int AddHitRating2 { get; set; }
     }
 }
